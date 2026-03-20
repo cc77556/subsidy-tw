@@ -68,12 +68,69 @@ export default async function SubsidyDetailPage({
     url: subsidy.applyUrl,
   };
 
+  // Build FAQ structured data from subsidy fields
+  const faqEntries: { name: string; text: string }[] = [];
+
+  // Q1: Eligibility
+  const eligibilityAnswer = [
+    subsidy.eligibility.description,
+    ...subsidy.eligibility.conditions.map((c, i) => `${i + 1}. ${c}`),
+  ].join('\n');
+  faqEntries.push({
+    name: `${subsidy.name}的申請資格是什麼？`,
+    text: eligibilityAnswer,
+  });
+
+  // Q2: Amount + highlights
+  const amountParts = [subsidy.amount];
+  if (subsidy.highlights.length > 0) {
+    amountParts.push(...subsidy.highlights);
+  }
+  faqEntries.push({
+    name: `${subsidy.name}的補助金額是多少？`,
+    text: amountParts.join('。'),
+  });
+
+  // Q3: How to apply
+  const applyAnswer = subsidy.howToApply
+    .map((step, i) => `步驟${i + 1}：${step}`)
+    .join('\n');
+  faqEntries.push({
+    name: `${subsidy.name}要怎麼申請？`,
+    text: applyAnswer,
+  });
+
+  // Q4: Deadline
+  faqEntries.push({
+    name: `${subsidy.name}的申請截止日是什麼時候？`,
+    text: `${subsidy.name}的申請截止日為${subsidy.deadline}。請留意截止時間，以免錯過申請機會。`,
+  });
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqEntries.map((q) => ({
+      '@type': 'Question',
+      name: q.name,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: q.text,
+      },
+    })),
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c'),
         }}
       />
 
