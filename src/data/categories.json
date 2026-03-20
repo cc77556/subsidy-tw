@@ -1,0 +1,11 @@
+[
+  {"id": "housing", "name": "租屋購屋", "icon": "🏠", "color": "#3B82F6", "description": "租金補貼、房貸優惠、住宅補助"},
+  {"id": "parenting", "name": "育兒家庭", "icon": "👶", "color": "#EC4899", "description": "生育給付、育兒津貼、托育補助"},
+  {"id": "energy", "name": "節能環保", "icon": "⚡", "color": "#10B981", "description": "家電汰舊換新、電動車補助"},
+  {"id": "employment", "name": "就業職訓", "icon": "💼", "color": "#F59E0B", "description": "就業獎勵、職訓補助、在職進修"},
+  {"id": "healthcare", "name": "醫療健康", "icon": "🏥", "color": "#EF4444", "description": "免費篩檢、長照扣除"},
+  {"id": "travel", "name": "旅遊觀光", "icon": "✈️", "color": "#8B5CF6", "description": "國旅補助"},
+  {"id": "welfare", "name": "社會福利", "icon": "🤝", "color": "#06B6D4", "description": "低收中低收入補助"},
+  {"id": "education", "name": "教育學費", "icon": "🎓", "color": "#6366F1", "description": "學費減免、就學貸款、獎學金"},
+  {"id": "elderly", "name": "長照銀髮", "icon": "👴", "color": "#78716C", "description": "長照補助、身障補助、老人津貼"}
+]
