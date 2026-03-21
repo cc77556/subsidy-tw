@@ -11,6 +11,40 @@ import {
 } from '@/lib/subsidies';
 import SubsidyCard from '@/components/SubsidyCard';
 
+const categoryRecommendations: Record<string, Array<{ title: string; description: string; cta: string; url: string; tag: string }>> = {
+  housing: [
+    { title: '房貸利率比較', description: '比較各銀行最新房貸利率，找到最划算的方案', cta: '立即比較', url: 'https://www.money101.com.tw/mortgage', tag: '房貸' },
+    { title: '租屋找房', description: '591 租屋網找到理想住處', cta: '開始找房', url: 'https://rent.591.com.tw', tag: '租屋' },
+  ],
+  parenting: [
+    { title: '嬰幼兒保險比較', description: '幫寶寶選擇合適的保險方案', cta: '了解方案', url: 'https://www.money101.com.tw/insurance', tag: '保險' },
+    { title: '親子用品優惠', description: 'momo 親子館限時優惠', cta: '查看優惠', url: 'https://www.momoshop.com.tw', tag: '購物' },
+  ],
+  energy: [
+    { title: '節能家電比價', description: '一級能效冷氣、冰箱最低價比較', cta: '比價去', url: 'https://www.momoshop.com.tw', tag: '家電' },
+    { title: '電動機車優惠', description: 'Gogoro 最新購車方案', cta: '查看方案', url: 'https://www.gogoro.com', tag: '電動車' },
+  ],
+  employment: [
+    { title: '履歷健檢', description: 'AI 幫你優化履歷，提升面試機會', cta: '免費試用', url: 'https://www.104.com.tw', tag: '求職' },
+    { title: '線上課程', description: 'Hahow 熱門職場技能課程', cta: '探索課程', url: 'https://hahow.in', tag: '進修' },
+  ],
+  healthcare: [
+    { title: '醫療險比較', description: '找到適合的醫療保險方案', cta: '比較方案', url: 'https://www.money101.com.tw/insurance', tag: '保險' },
+  ],
+  education: [
+    { title: '線上學習平台', description: '多種免費和付費課程可選', cta: '開始學習', url: 'https://hahow.in', tag: '學習' },
+  ],
+  elderly: [
+    { title: '長照保險', description: '及早規劃長照保險', cta: '了解方案', url: 'https://www.money101.com.tw/insurance', tag: '保險' },
+  ],
+  travel: [
+    { title: '住宿比價', description: 'Agoda 國內旅宿最低價', cta: '搜尋住宿', url: 'https://www.agoda.com/zh-tw', tag: '旅遊' },
+  ],
+  welfare: [
+    { title: '理財規劃', description: '免費理財諮詢服務', cta: '預約諮詢', url: 'https://www.money101.com.tw', tag: '理財' },
+  ],
+};
+
 export function generateStaticParams() {
   return getAllSubsidies().map((s) => ({ id: s.id }));
 }
@@ -246,6 +280,53 @@ export default async function SubsidyDetailPage({
           </a>
           <p className="text-gray-400 dark:text-slate-500 text-xs mt-2">將前往官方申請網站</p>
         </div>
+
+        {/* Related Recommendations */}
+        {categoryRecommendations[subsidy.category] && (
+          <div className="mb-10">
+            <div className="mb-3">
+              <h2 className="text-base font-semibold text-gray-700 dark:text-slate-300 inline">
+                💡 相關推薦
+              </h2>
+              <span className="text-xs text-gray-400 dark:text-slate-500 ml-2">
+                (本站可能從推薦連結獲得佣金，不影響您的費用)
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {categoryRecommendations[subsidy.category].map((rec, i) => (
+                <div
+                  key={i}
+                  className="bg-gray-50 dark:bg-slate-800/60 border border-gray-100 dark:border-slate-700/60 rounded-xl p-4 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-full">
+                        {rec.tag}
+                      </span>
+                      <h3 className="text-sm font-semibold text-gray-800 dark:text-slate-200">
+                        {rec.title}
+                      </h3>
+                    </div>
+                    <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed mb-3">
+                      {rec.description}
+                    </p>
+                  </div>
+                  <a
+                    href={rec.url}
+                    target="_blank"
+                    rel="noopener sponsored"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors self-start"
+                  >
+                    {rec.cta}
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-10">

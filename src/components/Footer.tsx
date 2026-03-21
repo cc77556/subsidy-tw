@@ -56,6 +56,11 @@ export default function Footer() {
                   我的E政府
                 </a>
               </li>
+              <li>
+                <Link href="/privacy" className="text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 text-sm transition-colors">
+                  隱私權政策
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
