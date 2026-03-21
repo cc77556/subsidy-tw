@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { getAllSubsidies, getCategories } from '@/lib/subsidies';
+import { siteConfig } from '@/data/config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://subsidy.tw';
+  const baseUrl = siteConfig.url;
   const now = new Date();
 
   const subsidies = getAllSubsidies();
