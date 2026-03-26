@@ -1,3 +1,4 @@
+import Script from "next/script";
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
@@ -55,10 +56,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
-              <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J3QL25L9N"></script>
-        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-3J3QL25L9N");` }} />
-      </head>
+</head>
       <body style={{ fontFamily: '"Noto Sans TC", sans-serif' }}>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-3J3QL25L9N" strategy="afterInteractive" />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-3J3QL25L9N");`}
+        </Script>
         <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100">
           <Header />
           <main className="flex-grow">{children}</main>
